@@ -1,6 +1,6 @@
 
 import sys
-import pandas
+
 import numpy
 import glob
 import re
@@ -109,7 +109,37 @@ def redactdate(data2):
 
             count42 += len(str1)
 
-    count4 = count41 + count42        
+
+    expression2 = r"((\d{2})?(\s*)?([A-Za-z]+)(,?)(\s*)?(\d{4})(\s*?)(,?)((\s*)?(\d{2}?)((:?))(\d{2}?))?)"
+
+    
+
+    count43 = 0
+
+    for match in re.finditer(expression2, data33.text):
+        start, end = match.span()
+        span = data33.char_span(start,end)
+        if span is not None:
+            str1 = str(span.text)
+            data2 = data2.replace(str1, "\u2588" *len(str1))
+            count43 += len(str1)
+
+
+    expression3 = r"([A-Za-z]+)(,?)(\s*)?(\d{4})"
+
+    count44 = 0
+
+    for match in re.finditer(expression3, data33.text):
+        start, end = match.span()
+        span = data33.char_span(start,end)
+        if span is not None:
+            str1 = str(span.text)
+            data2 = data2.replace(str1, "\u2588" *len(str1))
+            count44 += len(str1)
+
+
+
+    count4 = count41 + count42 + count43 + count44
 
     return data2, count4
 
