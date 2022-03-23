@@ -10,6 +10,7 @@ nltk = "*"
 spacy = "*"
 pandas = "*"
 virtualenv = {path = "."}
+numpy = "*"
 
 [dev-packages]
 
