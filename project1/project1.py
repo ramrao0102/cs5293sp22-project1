@@ -62,12 +62,49 @@ def redactphone(data2):
 
     matches = matcher(data22)
 
-    count3 = 0
+    count31 = 0
 
     for mid, start, end in matches:
         data2 = data2.replace(str(data22[start:end]), "\u2588" *len(str(data22[start:end])))
         
-        count3 +=  len(str(data22[start:end]))
+        count31 +=  len(str(data22[start:end]))
+
+
+
+    expression = r"(\d{3})(\s*)?(.)?(\s*)?(\d{3})(\s*)?(.)?(\s*)?(\d{4})"
+
+
+    count32 = 0 
+
+    for match in re.finditer(expression, data22.text):
+        start, end = match.span()
+        span = data22.char_span(start,end)
+
+        if span is not None:
+            
+            str1 = str(span.text)
+            
+            data2 = data2.replace(str1, "\u2588" *len(str1))
+
+            count32 += len(str1)
+
+    expression1 = r"(\d{3})(\s*)?(\/)(\s*)?(\d{3})(\s*)?(\/)(\s*)?(\d{4})"
+
+    count33 = 0 
+
+    for match in re.finditer(expression1, data22.text):
+        start, end = match.span()
+        span = data22.char_span(start,end)
+
+        if span is not None:
+
+            str1 = str(span.text)
+
+            data2 = data2.replace(str1, "\u2588" *len(str1))
+
+            count33 += len(str1)
+    
+    count3 = count31 + count32 + count33
 
     return data2, count3
 
@@ -77,7 +114,7 @@ def redactdate(data2):
     data33 = nlp(data2)
 
 
-    expression = r"([A-Za-z]{1,3},)(\s*)(\d{1,2})(\s*)([A-Za-z]{3})(\s*)(\d{2,4})(\s*)(\d{2}:\d{2}:\d{2})(\s*)(-*)(\d{4})(\s*)((\(*)([PCE]ST)(\)*))?"
+    expression = r"([A-Za-z]{1,9},)(\s*)(\d{1,2})(\s*)([A-Za-z]{1,9})(\s*)(\d{2,4})(\s*)(\d{2}:\d{2}:\d{2})(\s*)(-*)(\d{4})(\s*)((\(*)([PCE]ST)(\)*))?"
 
     count41 = 0 
 
@@ -155,7 +192,7 @@ def redactaddress(data2):
 
     matches = matcher44(data44)
 
-    count5 = 0
+    count51 = 0
 
     for mid, start, end in matches:
         
@@ -163,7 +200,74 @@ def redactaddress(data2):
         
         data2 = data2.replace(str1, "\u2588"*len(str1))
 
-        count5 += len(str1)
+        count51 += len(str1)
+
+    count52 =0
+
+    expression41 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:St)(.)?"
+
+    for match in re.finditer(expression41, data44.text):
+        start, end = match.span()
+        span = data44.char_span(start,end)
+        if span is not None:
+            str1 = str(span.text)
+            data2 = data2.replace(str1, "\u2588" *len(str1))
+            count52 += len(str1)
+
+    count53 =0
+
+    expression42 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:Rd)(.)?"
+
+
+    for match in re.finditer(expression42, data44.text):
+        start, end = match.span()
+        span = data44.char_span(start,end)
+        if span is not None:
+            str1 = str(span.text)
+            data2 = data2.replace(str1, "\u2588" *len(str1))
+            count53 += len(str1)
+
+    count54 =0
+
+    expression43 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:Ave)(.)?"
+
+
+    for match in re.finditer(expression43, data44.text):
+        start, end = match.span()
+        span = data44.char_span(start,end)
+        if span is not None:
+            str1 = str(span.text)
+            data2 = data2.replace(str1, "\u2588" *len(str1))
+            count54 += len(str1)
+
+    count55 = 0
+
+
+    expression44 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:Hwy)(.)?"
+
+
+    for match in re.finditer(expression44, data44.text):
+        start, end = match.span()
+        span = data44.char_span(start,end)
+        if span is not None:
+            str1 = str(span.text)
+            data2 = data2.replace(str1, "\u2588" *len(str1))
+            count55 += len(str1)
+
+    count56 = 0
+
+    expression45 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:Plaza)(.)?"
+
+
+    for match in re.finditer(expression45, data44.text):
+        start, end = match.span()
+        span = data44.char_span(start,end)
+        if span is not None:
+            str1 = str(span.text)
+            data2 = data2.replace(str1, "\u2588" *len(str1))
+            count56 += len(str1)
+
+    count5 = count51 + count52 + count53 + count54 +count55 +count56
 
     return data2, count5
 
