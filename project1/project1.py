@@ -71,7 +71,7 @@ def redactphone(data2):
 
 
 
-    expression = r"(\()?(\s*)?(\d{3})(\s*)?((\))?\s*)?(.)?(\s*)?(\d{3})(\s*)?(.)?(\s*)?(\d{4})"
+    expression = r"(\()?(\d{3})(\))?(\s*)?(.)?(\s*)?(\d{3})(\s*)?(.)?(\s*)?(\d{4})"
 
 
     count32 = 0 
@@ -88,7 +88,7 @@ def redactphone(data2):
 
             count32 += len(str1)
 
-    expression1 = r"(\()?(\s*)?(\d{3})(\s*)?(\))?(\s*)?(\/)(\s*)?(\d{3})(\s*)?(\/)(\s*)?(\d{4})"
+    expression1 = r"(\()?(\d{3})(\))?(\s*)?(\/)?(\s*)?(\d{3})(\s*)?(\/)?(\s*)?(\d{4})"
 
     count33 = 0 
 
@@ -204,7 +204,7 @@ def redactaddress(data2):
 
     count52 =0
 
-    expression41 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:St)(.)?"
+    expression41 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?((?:St)|(?:Street))(.)?"
 
     for match in re.finditer(expression41, data44.text):
         start, end = match.span()
@@ -216,7 +216,7 @@ def redactaddress(data2):
 
     count53 =0
 
-    expression42 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:Rd)(.)?"
+    expression42 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?((?:Rd)|(?:Road))(.)?"
 
 
     for match in re.finditer(expression42, data44.text):
@@ -229,7 +229,7 @@ def redactaddress(data2):
 
     count54 =0
 
-    expression43 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:Ave)(.)?"
+    expression43 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?((?:Ave)|(?:Avenue))(.)?"
 
 
     for match in re.finditer(expression43, data44.text):
@@ -243,7 +243,7 @@ def redactaddress(data2):
     count55 = 0
 
 
-    expression44 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:Hwy)(.)?"
+    expression44 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?((?:Hwy)|(?:Highway))(.)?"
 
 
     for match in re.finditer(expression44, data44.text):
@@ -256,7 +256,7 @@ def redactaddress(data2):
 
     count56 = 0
 
-    expression45 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:Plaza)(.)?"
+    expression45 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?((?:Plaza)|(?:Pz))(.)?"
 
 
     for match in re.finditer(expression45, data44.text):
