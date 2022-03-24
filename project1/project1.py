@@ -204,7 +204,7 @@ def redactaddress(data2):
 
     count52 =0
 
-    expression41 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?((?:St)|(?:Street))(.)?"
+    expression41 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:St)(.)?"
 
     for match in re.finditer(expression41, data44.text):
         start, end = match.span()
@@ -216,7 +216,7 @@ def redactaddress(data2):
 
     count53 =0
 
-    expression42 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?((?:Rd)|(?:Road))(.)?"
+    expression42 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:Rd)(.)?"
 
 
     for match in re.finditer(expression42, data44.text):
@@ -229,7 +229,7 @@ def redactaddress(data2):
 
     count54 =0
 
-    expression43 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?((?:Ave)|(?:Avenue))(.)?"
+    expression43 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:Ave)(.)?"
 
 
     for match in re.finditer(expression43, data44.text):
@@ -243,7 +243,7 @@ def redactaddress(data2):
     count55 = 0
 
 
-    expression44 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?((?:Hwy)|(?:Highway))(.)?"
+    expression44 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:Hwy)(.)?"
 
 
     for match in re.finditer(expression44, data44.text):
@@ -256,7 +256,7 @@ def redactaddress(data2):
 
     count56 = 0
 
-    expression45 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?((?:Plaza)|(?:Pz))(.)?"
+    expression45 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:Plaza)(.)?"
 
 
     for match in re.finditer(expression45, data44.text):
