@@ -71,7 +71,7 @@ def redactphone(data2):
 
 
 
-    expression = r"(\d{3})(\s*)?(.)?(\s*)?(\d{3})(\s*)?(.)?(\s*)?(\d{4})"
+    expression = r"(\()?(\s*)?(\d{3})(\s*)?((\))?\s*)?(.)?(\s*)?(\d{3})(\s*)?(.)?(\s*)?(\d{4})"
 
 
     count32 = 0 
@@ -88,7 +88,7 @@ def redactphone(data2):
 
             count32 += len(str1)
 
-    expression1 = r"(\d{3})(\s*)?(\/)(\s*)?(\d{3})(\s*)?(\/)(\s*)?(\d{4})"
+    expression1 = r"(\()?(\s*)?(\d{3})(\s*)?(\))?(\s*)?(\/)(\s*)?(\d{3})(\s*)?(\/)(\s*)?(\d{4})"
 
     count33 = 0 
 
