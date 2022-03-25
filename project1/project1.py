@@ -267,9 +267,24 @@ def redactaddress(data2):
             data2 = data2.replace(str1, "\u2588" *len(str1))
             count56 += len(str1)
 
-    count5 = count51 + count52 + count53 + count54 +count55 +count56
+    count57 = 0
+
+    expression46 = r"(P)(\s*)?(O)(\s*)?(Box)(\s*)?(\d+)"
+
+    for match in re.finditer(expression46, data44.text):
+        start, end = match.span()
+        span = data44.char_span(start,end)
+        if span is not None:
+            str1 = str(span.text)
+            data2 = data2.replace(str1, "\u2588" *len(str1))
+            count57 += len(str1)
+
+
+    count5 = count51 + count52 + count53 + count54 + count55 + count56 + count57
 
     return data2, count5
+    
+
 
 def redactconcept(data2):
 
