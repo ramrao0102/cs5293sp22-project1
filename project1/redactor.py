@@ -161,7 +161,7 @@ for i in range(len(newstats)):
 
     if outputstr == "stderr":
 
-        sys.stdout.write("Summary Statistics of Redacted Strings: " + '\n')
+        sys.stderr.write("Summary Statistics of Redacted Strings: " + '\n')
 
         sys.stderr.write("Length of Redacted Name String: " + "file " + str(i+1) + ',' + str(newstats[i][0])+'\n')
 
