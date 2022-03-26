@@ -1,7 +1,7 @@
 
 import sys
 
-import numpy
+import numpy as np
 import glob
 import re
 import nltk
@@ -9,8 +9,11 @@ import spacy
 import project1
 from spacy.matcher import Matcher
 from spacy.matcher import PhraseMatcher
+from nltk.corpus import wordnet
+nltk.download("wordnet")
 
 
+nlp = spacy.load('en_core_web_md')
 
 filename = sys.argv[2]
 names = sys.argv[3]
@@ -19,14 +22,13 @@ phones = sys.argv[5]
 genders = sys.argv[6]
 address = sys.argv[7]
 concept = sys.argv[8]
-stat = sys.argv[11]
+stat = sys.argv[12]
+conceptstr = sys.argv[9]
+outputstr = sys.argv[13]
 
-print(names)
-print(type(names))
 
 path = "/home/ramrao0102/project1/enroncorpus/"+filename
 
-nlp = spacy.load('en_core_web_md')
 
 wrpath = sys.argv[11]
 
@@ -37,6 +39,7 @@ print(files_grabbed)
 stats = []
 
 for i in files_grabbed:
+    
     with open(i) as f:
         writefile = i.replace('home/ramrao0102/project1/enroncorpus', '')
         data = f.read()
@@ -44,13 +47,14 @@ for i in files_grabbed:
     data2 = data
 
     if names == "--names":
+    
         data2, count1 =  project1.redactname(data2)
 
     stats.append(count1)
 
     if genders == "--genders":
         data2, count2 = project1.redactgender(data2)
-
+        
     stats.append(count2)
 
     if phones == "--phones":
@@ -69,12 +73,19 @@ for i in files_grabbed:
     stats.append(count5)
 
     if concept == "--concept":
-        data2, count6  = project1.redactconcept(data2)
+        data2, count6  = project1.redactconcept(data2, conceptstr)
 
     stats.append(count6)
 
+
+    if outputstr == "stdout":
+
+        sys.stdout.write( data2 )
+
+
+    if outputstr == "stderr":
+        sys.stderr.write(data2)
     
-    print(data2)
 
     writename = writefile + "redacted"
 
@@ -130,18 +141,37 @@ with open('stats.txt', 'w') as my_list_file:
     my_list_file.writelines("%s\n" % stats for stats in statsreturned)
 
 
-
 for i in range(len(newstats)):
 
-    print("Length of Redacted Name String:","file", i+1,  newstats[i][0])
+    if outputstr == "stdout":
 
-    print("Length of Redacted Genders String:", "file", i+1, newstats[i][1])
+        sys.stdout.write("Summary Statistics of Redacted Strings: " + '\n')
 
-    print("Length of Redacted Phones String:", "file", i+1, newstats[i][2])
+        sys.stdout.write("Length of Redacted Name String: " + "file " + str(i+1) + ',' + str(newstats[i][0]) +'\n')
 
-    print("Length of Redacted Dates String:", "file", i+1, newstats[i][3])
+        sys.stdout.write("Length of Redacted Genders String: " + "file " +  str(i+1) + ',' + str(newstats[i][1]) +'\n')
 
-    print("Length of Redacted Address String:", "file", i+1, newstats[i][4])
+        sys.stdout.write("Length of Redacted Phones String: " + "file " + str(i+1) + ',' + str(newstats[i][2])+'\n')
 
-    print("Length of Redacted Concept String:", "file", i+1, newstats[i][5])
+        sys.stdout.write("Length of Redacted Dates String: " + "file " + str(i+1) + ',' + str(newstats[i][3])+'\n')
+
+        sys.stdout.write("Length of Redacted Address String: " + "file " +  str(i+1) + ',' + str (newstats[i][4])+'\n')
+
+        sys.stdout.write("Length of Redacted Concept String: " + "file " + str(i+1) + ',' + str(newstats[i][5])+'\n')
+
+    if outputstr == "stderr":
+
+        sys.stdout.write("Summary Statistics of Redacted Strings: " + '\n')
+
+        sys.stderr.write("Length of Redacted Name String: " + "file " + str(i+1) + ',' + str(newstats[i][0])+'\n')
+
+        sys.stderr.write("Length of Redacted Genders String: " + "file " +  str(i+1) + ',' + str(newstats[i][1])+'\n')
+
+        sys.stderr.write("Length of Redacted Phones String: " + "file " + str(i+1) + ',' + str(newstats[i][2])+'\n')
+
+        sys.stderr.write("Length of Redacted Dates String: " + "file " + str(i+1) + ',' + str(newstats[i][3])+'\n')
+
+        sys.stderr.write("Length of Redacted Address String: " + "file " +  str(i+1) + ',' + str (newstats[i][4])+'\n')
+
+        sys.stderr.write("Length of Redacted Concept String: " + "file " + str(i+1) + ',' + str(newstats[i][5])+'\n')
 

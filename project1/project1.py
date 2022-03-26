@@ -8,6 +8,8 @@ import nltk
 import spacy
 from spacy.matcher import Matcher
 from spacy.matcher import PhraseMatcher
+from nltk.corpus import wordnet
+
 
 nlp = spacy.load('en_core_web_md')
 
@@ -269,7 +271,7 @@ def redactaddress(data2):
 
     count57 = 0
 
-    expression46 = r"(P)(\s*)?(O)(\s*)?(Box)(\s*)?(\d+)"
+    expression46 = r"(P)(\s*)?(O)(\s*)?(Box)(\s*)?(\d+) (.)?"
 
     for match in re.finditer(expression46, data44.text):
         start, end = match.span()
@@ -286,23 +288,40 @@ def redactaddress(data2):
     
 
 
-def redactconcept(data2):
+def redactconcept(data2, conceptstr):
 
     data55 = nlp(data2)
 
 
     count6 = 0
 
-    for token in data55:
+    syno = similarword(conceptstr)
+
+    for k in syno:
+
+
+        for token in data55:
         
-        if str(token) == "cancer" :
+            if str(token) == k:
             
-            token1 = data55[token.i]
-            
+                token1 = data55[token.i]
+                
+                print(str(token1.sent))
 
-            data2 = data2.replace(str(token1.sent), "\u2588"*len(str(token1.sent)))
+                data2 = data2.replace(str(token1.sent), "\u2588"*len(str(token1.sent)))
 
-            count6 += len(str(token1.sent))
+                count6 += len(str(token1.sent))
 
     return data2, count6
 
+def similarword(conceptstr):
+    synonyms = ['jail', 'jailhouse', 'gaol', 'clink', 'slammer', 'poky', 'pokey', 'imprison', 'incarcerate', 'lag', 'immure', 'put_behind_bars', 'jail', 'jug', 'gaol', 'put_away', 'remand']
+
+   # for syn in wordnet.synsets(conceptstr):
+    #    for lm in syn.lemmas():
+     #       synonyms.append(lm.name())
+
+
+    print(synonyms)
+
+    return synonyms
