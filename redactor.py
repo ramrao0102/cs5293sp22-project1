@@ -47,7 +47,7 @@ if __name__ == "__main__":
             outputstr = arg_ls[j+1]
 
 
-    path = "/home/ramrao0102/project1/enroncorpus/"+filename
+    path = "enroncorpus/"+filename
 
     files_grabbed = (glob.glob(path))
 
@@ -58,7 +58,7 @@ if __name__ == "__main__":
     for i in files_grabbed:
     
         with open(i) as f:
-            writefile = i.replace('home/ramrao0102/project1/enroncorpus', '')
+            writefile = i.replace('enroncorpus', '')
             data = f.read()
     
         data2 = data
