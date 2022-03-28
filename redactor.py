@@ -44,6 +44,8 @@ if __name__ == "__main__":
             wrpath = arg_ls[j+1]
 
         if arg_ls[j] == "--stats":
+            stats1 = arg_ls[j]
+            stats1 = stats1[2:]
             outputstr = arg_ls[j+1]
 
 
@@ -154,7 +156,9 @@ if __name__ == "__main__":
     statsreturned.append(len5)
     statsreturned.append(len6)
 
-    with open('stats.txt', 'w') as my_list_file:
+    statsfilename = stats1 +'.txt'
+
+    with open(statsfilename, 'w') as my_list_file:
         my_list_file.writelines("%s\n" % stats for stats in statsreturned)
 
 
