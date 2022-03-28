@@ -1,9 +1,13 @@
 Documentation for Project 1/CS 5293
 This is Ramkishore Rao’s Project 1
 A series of emails were provided from the Company Enron.  They are text files.  The corpus is called Enroncorpus.
-The objective of the project is to redact certain sensitive information based on select set of rules that have been identified as criteria for the project.  The dataset was downloaded by running the following commands from the command line.
+
+The objective of the project is to redact certain sensitive information based on select set of rules that have been identified as criteria for the project.  
+The dataset was downloaded by running the following commands from the command line.
 wget https://www.cs.cmu.edu/~enron/enron_mail_20150507.tar.gz tar xvzf enron_mail_20150507.tar.gz
-Several files were placed under project1\enroncorpus.  Note a write1 folder was created under enroncorpus to place the redacted files in that folder following execution of the program.
+Several files were placed under project1\enroncorpus.  Note a write1 folder was created under enroncorpus to place the 
+redacted files in that folder following execution of the program.
+
 Packages that were utilized to run the project are as follows:
 •	sys
 •	glob
