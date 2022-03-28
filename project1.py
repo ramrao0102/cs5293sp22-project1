@@ -163,12 +163,24 @@ def redactdate(data2):
             data2 = data2.replace(str1, "\u2588" *len(str1))
             count43 += len(str1)
 
+    expression3 = r"[A-Za-z]{1,9}(,)(\s*)?[A-Za-z]{1,9}(\s*)(\d{2})(,)?(\s*)?(\d{4})"
+    
+    count441 = 0
 
-    expression3 = r"([A-Za-z]+)(,?)(\s*)?(\d{4})"
+    for match in re.finditer(expression3, data33.text):
+        start, end = match.span()
+        span = data33.char_span(start,end)
+        if span is not None:
+            str1 = str(span.text)
+            data2 = data2.replace(str1, "\u2588" *len(str1))
+            count441 += len(str1)
+
+
+    expression4 = r"([A-Za-z]+)(,?)(\s*)?(\d{4})"
 
     count44 = 0
 
-    for match in re.finditer(expression3, data33.text):
+    for match in re.finditer(expression4, data33.text):
         start, end = match.span()
         span = data33.char_span(start,end)
         if span is not None:
@@ -178,7 +190,7 @@ def redactdate(data2):
 
 
 
-    count4 = count41 + count42 + count43 + count44
+    count4 = count41 + count42 + count43 + count441+ count44
 
     return data2, count4
 
