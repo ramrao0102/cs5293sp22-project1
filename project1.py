@@ -149,7 +149,7 @@ def redactdate(data2):
             count42 += len(str1)
 
 
-    expression2 = r"((\d{2})?(\s*)?([A-Za-z]+)(,?)(\s*)?(\d{4})(\s*?)(,?)((\s*)?(\d{2}?)((:?))(\d{2}?))?)"
+    expression2 = r"((\d{2})(\s*)?([A-Za-z]+)(,?)(\s*)?(\d{4})(\s*?)(,?)((\s*)?(\d{2}?)((:?))(\d{2}?))?)"
 
     
 
@@ -188,7 +188,7 @@ def redactaddress(data2):
 
     matcher44 = Matcher(nlp.vocab)
 
-    pattern = [{"ENT_TYPE": "GPE"}, {"TEXT": ",", "OP": "?"}, {"TEXT": {"REGEX" : "[A-Z]{2}"}}, {"TEXT": {"REGEX": "(\d{5})"}}]
+    pattern = [{"ENT_TYPE": "GPE"}, {"TEXT": ",", "OP": "?"}, {"TEXT": {"REGEX" : "[A-Z]{2}"}}, {"TEXT": {"REGEX": r"(\d{5})"}}]
 
     matcher44.add("Location", [pattern])
 
