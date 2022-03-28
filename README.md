@@ -4,7 +4,8 @@ A series of emails were provided from the Company Enron.  They are text files.  
 
 The objective of the project is to redact certain sensitive information based on select set of rules that have been identified as criteria for the project.  
 The dataset was downloaded by running the following commands from the command line.
-wget https://www.cs.cmu.edu/~enron/enron_mail_20150507.tar.gz tar xvzf enron_mail_20150507.tar.gz
+wget https://www.cs.cmu.edu/~enron/enron_mail_20150507.tar.gz 
+tar xvzf enron_mail_20150507.tar.gz
 Several files were placed under project1\enroncorpus.  Note a write1 folder was created under enroncorpus to place the 
 redacted files in that folder following execution of the program.
 
