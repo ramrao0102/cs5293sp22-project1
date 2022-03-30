@@ -318,7 +318,7 @@ def redactconcept(data2, conceptstr):
             
                 token1 = data55[token.i]
                 
-                print(str(token1.sent))
+                #print(str(token1.sent))
 
                 data2 = data2.replace(str(token1.sent), "\u2588"*len(str(token1.sent)))
 
@@ -327,13 +327,11 @@ def redactconcept(data2, conceptstr):
     return data2, count6
 
 def similarword(conceptstr):
-    synonyms = ['jail', 'jailhouse', 'gaol', 'clink', 'slammer', 'poky', 'pokey', 'imprison', 'incarcerate', 'lag', 'immure', 'put_behind_bars', 'jail', 'jug', 'gaol', 'put_away', 'remand']
+    synonyms = [ ]
 
-   # for syn in wordnet.synsets(conceptstr):
-    #    for lm in syn.lemmas():
-     #       synonyms.append(lm.name())
+    for syn in wordnet.synsets(conceptstr):
+        for lm in syn.lemmas():
+            synonyms.append(lm.name())
 
-
-    print(synonyms)
 
     return synonyms
