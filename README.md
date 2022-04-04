@@ -1,4 +1,3 @@
-
 # This is Ramkishore Rao's readme file for Project 1
 
 ## Introduction
@@ -22,6 +21,7 @@ Packages that were utilized to run the project are as follows:'
 
 Also, spacy’s medium language library was uploaded because I had difficulty uploading the large language library by typing the following command on the command line.<br>
 9. nlp = spacy.load('en_core_web_md')
+
 
 ## Program Execution from Command Line, Read Files for Redaction
 
@@ -55,16 +55,18 @@ via the glob.glob command.
 The files are read one at a time and then the redactor.py calls functions within project1.py to implement redaction
 
 For each file, the data is assigned to data2, which is a string and it is then passed by calling functions from <br>
-the “project1.py” file.
+the “project1.py” file. <br>
 Several functions have been written in the project1.py to perform the redaction.<br>
 
-The function def redactname(data2) is used to find “PERSON”.
+The function def redactname(data2) is used to find “PERSON”
 
 1) If a person entity type is founded, it is redacted, and the count of the length of the string redacted and the data2 string is returned to main. <br>
 2) \u2588 unicode full block character replaces each string character redacted.
 
 The function def redactgender(data2) is used to find gender strings to redact.
-1) I am using a list of "he", "him", "her", "she", "He", "She", "Him", "Her" in a list and if a token in a <br>
+
+1) I am using a list of "he", "him", "her", "she", "He", "She", "Him", "Her", "father", "Father", "Mother", <br>
+"mother", "Sister", "sister", "Brother", "brother", "girl", "Girl", "Boy", "boy" in a list and if a token in a <br>
 data string matches these strings, then the token is redacted. The count of the length of the string redacted and <br>
 the data2 string is returned to main. <br>
 2) \u2588 unicode full block character replaces each string character redacted.
@@ -82,15 +84,19 @@ There were several patterns/expressions checked and they are presented below.
 Expression <br>
 Sun, 30 Dec 2001 22:49:42 -0800 (PST), This will allow any day of the week to be included first, followed by the date, month, <br> 
 time in the format provided and either P, C, or E as the letters to denote which zone we are in followed by ST. <br>
+Also allowed is D instead of S in the expression <br>
 Expression1 <br>
 02/03/22 12:15 AM or 02/03/22 12:15 PM <br>
+02/03/22 12:15:30 AM or 02/03/22 12:15:30 PM <br>
 Expression2 <br>
 13 Dec 2000, 15:55 or 13 December 2000, 15:55 <br>
 Expression3 <br>
-Tuesday, November 27, 2001 or Tue. Nov 27, 2011 <br>
+Tuesday, November 27, 2001 or Tue, Nov 27, 2011 <br>
+This expression will acccomodate 10:30:25 AM or PM as options after the year
 Expression4 <br>
 January, 2022 or Jan, 2022 or January 2022 or Jan 2022 <br>
-
+Expression4 <br>
+02/20/2011
 
 The function redactaddress(data2) is used to find addresses of different patterns to redact. <br>
 There were several patterns/expressions checked and they are presented below.
@@ -122,17 +128,37 @@ and returned to reactor.py and these estimates are then either writen to a stats
 The option also exists to be output to console should the user enter stdout or stderr after --stats string on command line. <br>
 The stats.txt file contains the lengths of the strings redacted by redaction type.
 
+The stats.txt file contains six lines: <br>
+1) Line 1 contains total length of redacted string from all text files processed for names. <br>
+2) Line 2 contains total length of redacted string from all text files processed for gender specific words. <br>
+3) Line 3 contains total length of redacted string from all text files processed for phone numbers. <br>
+4) Line 4 contains total length of redacted string from all text files processed for dates. <br>
+5) Line 5 contains total length of redacted string from all text files processed for addresses. <br>
+6) Line 6 contains total length of redacted string from all text files processed for conceptstring.
+
 ## Testing of Package
 
-There are 2 tests included in the package:<br>
-    1) The first testfile has a function that checks for count of files following redaction in /enroncorpus/write1.<br>
+There are 5 tests included in the package:<br>
+    1) The first testfile (test_istheredata.py) has a function that checks for count of files following redaction in /enroncorpus/write1.<br>
         This function then has an assert statement that checks if there is more than 0 files, which tells us if a file is <br>
         passed in or read, then it is redacted as there are redacted files in the folder.
 
-    2) The second testfile has a function that checks the contents of stats.txt in root and asserts
-       if the values are greater than 0 for each type of redaction.  The stats.txt file contains length of 
-       strings redacted by redaction type.  So, it implicitly checks that the functions for redaction are being 
-       executed by the code in the package.
+
+2) The second testfile (test_functions.py) has a function that checks the contents of stats.txt in root and asserts<br>
+   if the values are greater than 0 for each type of redaction.  The stats.txt file contains length of <br>
+   strings redacted by redaction type.  So, it implicitly checks that the functions for redaction are being <br>
+   executed by the code in the package.
+
+3) The third testfile (test_namefunction.py) reads the glob of text files passed in and tests the redactname function in <br>
+project1.py, completes the redaction, and checks if the length of total redacted strings matches the length in the stats.txt file.
+
+4) The fourth testfile (test_phonefunction.py) reads the glob of text files passed in and tests the redactphone function in
+project1.py, completes the redaction, and checks if the length of total redacted strings matches the length in the stats.txt file.
+
+5) The fifth testfile (test_datefunction.py) reads the glob of text files passed in and tests the redactdate  function 
+in project1.py, completes the redaction, and checks if the length of total redacted strings matches the length in the stats.txt file.
 
 
+```python
 
+```
