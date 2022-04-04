@@ -129,9 +129,9 @@ There are 2 tests included in the package:<br>
         This function then has an assert statement that checks if there is more than 0 files, which tells us if a file is <br>
         passed in or read, then it is redacted as there are redacted files in the folder.
 
-    2) The second testfile has a function that checks the contents of stats.txt in root and asserts<br>
-       if the values are greater than 0 for each type of redaction.  The stats.txt file contains length of <br>
-       strings redacted by redaction type.  So, it implicitly checks that the functions for redaction are being <br>
+    2) The second testfile has a function that checks the contents of stats.txt in root and asserts
+       if the values are greater than 0 for each type of redaction.  The stats.txt file contains length of 
+       strings redacted by redaction type.  So, it implicitly checks that the functions for redaction are being 
        executed by the code in the package.
 
 
