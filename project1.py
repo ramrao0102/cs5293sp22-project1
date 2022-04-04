@@ -32,7 +32,7 @@ def redactgender(data2):
 
     data11 = nlp(data2)
 
-    gender = ["he", "him", "her", "she", "He", "She", "Him", "Her"]
+    gender = ["he", "him", "her", "she", "He", "She", "Him", "Her", "father", "Father", "Mother", "mother", "Sister", "sister", "Brother", "brother", "girl", "Girl", "Boy", "boy"]
 
     count2 = 0
     
