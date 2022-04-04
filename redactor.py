@@ -106,7 +106,7 @@ if __name__ == "__main__":
             sys.stderr.write(data2)
     
 
-        writename = writefile + "redacted"
+        writename = writefile + ".redacted"
 
         writepath = wrpath + "/"+ writename 
 
