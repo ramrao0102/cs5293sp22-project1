@@ -116,7 +116,7 @@ def redactdate(data2):
     data33 = nlp(data2)
 
 
-    expression = r"([A-Za-z]{1,9},)(\s*)(\d{1,2})(\s*)([A-Za-z]{1,9})(\s*)(\d{2,4})(\s*)(\d{2}:\d{2}:\d{2})(\s*)(-*)(\d{4})(\s*)((\(*)([PCE]ST)(\)*))?"
+    expression = r"([A-Za-z]{1,9},)(\s*)(\d{1,2})(\s*)([A-Za-z]{1,9})(\s*)(\d{2,4})(\s*)(\d{2}:\d{2}:\d{2})(\s*)(-*)(\d{4})(\s*)((\(*)([PCE][DS]T)(\)*))?"
 
     count41 = 0 
 
@@ -132,7 +132,7 @@ def redactdate(data2):
 
             count41 += len(str1)
 
-    expression1 = r"(\d{2})(\/)(\d{2})(\/)(\d{2})(\s*)(\d{2}:\d{2}:\d{2})(\s*)([AP]M)?"
+    expression1 = r"(\d{2})(\/)(\d{2})(\/)(\d{4})(\s*)(\d{2})(:)(\d{2})(:)?(\d{2})?(\s*)([AP]M)"
 
     count42 = 0
 
@@ -163,7 +163,7 @@ def redactdate(data2):
             data2 = data2.replace(str1, "\u2588" *len(str1))
             count43 += len(str1)
 
-    expression3 = r"[A-Za-z]{1,9}(,)(\s*)?[A-Za-z]{1,9}(\s*)(\d{2})(,)?(\s*)?(\d{4})"
+    expression3 = r"[A-Za-z]{1,9}(,)(\s*)?[A-Za-z]{1,9}(\s*)(\d{2})(,)?(\s*)?(\d{4})(\s*)(\d*)?(:)?(\d*)(\s*)([AP]M)?"
     
     count441 = 0
 
@@ -189,8 +189,21 @@ def redactdate(data2):
             count44 += len(str1)
 
 
+    expression5 = r"(\d{2})(\/)(\d{2})(\/)(\d{4})"
 
-    count4 = count41 + count42 + count43 + count441+ count44
+    count45 = 0
+
+    for match in re.finditer(expression5, data33.text):
+        start, end = match.span()
+        span = data33.char_span(start,end)
+        if span is not None:
+            str1 = str(span.text)
+            data2 = data2.replace(str1, "\u2588" *len(str1))
+            count45 += len(str1)
+
+
+
+    count4 = count41 + count42 + count43 + count441+ count44 + count45
 
     return data2, count4
 
