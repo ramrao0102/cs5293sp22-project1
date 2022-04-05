@@ -24,7 +24,7 @@ def test_phonefunction():
 
         data2 = data
 
-        data2, count4 = project1.redactphone(data2)
+        listphone, count4 = project1.redactphone(data2)
 
         count += count4
 
@@ -36,6 +36,6 @@ def test_phonefunction():
     for line in Lines:
         a.append(int(line.strip()))
 
-    assert count == a[2]
+    assert count == a[1]
 
     return 0

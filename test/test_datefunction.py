@@ -24,7 +24,7 @@ def test_datefunction():
 
         data2 = data
 
-        data2, count4 = project1.redactdate(data2)
+        listdate, count4 = project1.redactdate(data2)
 
         count += count4
 
@@ -36,6 +36,6 @@ def test_datefunction():
     for line in Lines:
         a.append(int(line.strip()))
 
-    assert count == a[3]
+    assert count == a[2]
 
     return 0

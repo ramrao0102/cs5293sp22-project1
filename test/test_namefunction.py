@@ -24,7 +24,7 @@ def test_namefunction():
 
         data2 = data
 
-        data2, count4 = project1.redactname(data2)
+        listname, count4 = project1.redactname(data2)
 
         count += count4
 

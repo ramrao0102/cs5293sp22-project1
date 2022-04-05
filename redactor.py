@@ -67,27 +67,39 @@ if __name__ == "__main__":
 
         if names == "--names":
     
-            data2, count1 =  project1.redactname(data2)
+            listname, count1 =  project1.redactname(data2)
 
         stats.append(count1)
-
-        if genders == "--genders":
-            data2, count2 = project1.redactgender(data2)
         
+        if phones == "--phones":
+
+            listphone, count2 = project1.redactphone(data2)
+
         stats.append(count2)
 
-        if phones == "--phones":
-            data2, count3 = project1.redactphone(data2)
+        if dates == "--dates":
+
+            listdate, count3 = project1.redactdate(data2)
 
         stats.append(count3)
-
-        if dates == "--dates":
-            data2, count4 = project1.redactdate(data2)
-
-        stats.append(count4)
     
         if address == "--address":
-            data2, count5  = project1.redactaddress(data2)
+
+            listaddress, count4  = project1.redactaddress(data2)
+
+        stats.append(count4)
+
+        listredact = listname + listphone + listdate + listaddress
+
+        for i in range(len(listredact)):
+            
+            dataredact = nlp(data)
+            
+            if len(str(dataredact[listredact[i][0]:listredact[i][1]])) > 1:
+                data2 = data2.replace(str(dataredact[listredact[i][0]:listredact[i][1]]), "\u2588" *len(str(dataredact[listredact[i][0]:listredact[i][1]])))
+
+        if genders == "--genders":
+            data2, count5 = project1.redactgender(data2)
 
         stats.append(count5)
 
@@ -95,7 +107,6 @@ if __name__ == "__main__":
             data2, count6  = project1.redactconcept(data2, conceptstr)
 
         stats.append(count6)
-
 
         if outputstr == "stdout":
 
@@ -170,13 +181,13 @@ if __name__ == "__main__":
 
             sys.stdout.write("Length of Redacted Name String: " + "file " + str(i+1) + ',' + str(newstats[i][0]) +'\n')
 
-            sys.stdout.write("Length of Redacted Genders String: " + "file " +  str(i+1) + ',' + str(newstats[i][1]) +'\n')
+            sys.stdout.write("Length of Redacted Phones String: " + "file " +  str(i+1) + ',' + str(newstats[i][1]) +'\n')
 
-            sys.stdout.write("Length of Redacted Phones String: " + "file " + str(i+1) + ',' + str(newstats[i][2])+'\n')
+            sys.stdout.write("Length of Redacted Dates String: " + "file " + str(i+1) + ',' + str(newstats[i][2])+'\n')
 
-            sys.stdout.write("Length of Redacted Dates String: " + "file " + str(i+1) + ',' + str(newstats[i][3])+'\n')
+            sys.stdout.write("Length of Redacted Address String: " + "file " + str(i+1) + ',' + str(newstats[i][3])+'\n')
 
-            sys.stdout.write("Length of Redacted Address String: " + "file " +  str(i+1) + ',' + str (newstats[i][4])+'\n')
+            sys.stdout.write("Length of Redacted Genders String: " + "file " +  str(i+1) + ',' + str (newstats[i][4])+'\n')
 
             sys.stdout.write("Length of Redacted Concept String: " + "file " + str(i+1) + ',' + str(newstats[i][5])+'\n')
 
@@ -186,13 +197,13 @@ if __name__ == "__main__":
 
             sys.stderr.write("Length of Redacted Name String: " + "file " + str(i+1) + ',' + str(newstats[i][0])+'\n')
 
-            sys.stderr.write("Length of Redacted Genders String: " + "file " +  str(i+1) + ',' + str(newstats[i][1])+'\n')
+            sys.stderr.write("Length of Redacted Phones String: " + "file " +  str(i+1) + ',' + str(newstats[i][1])+'\n')
 
-            sys.stderr.write("Length of Redacted Phones String: " + "file " + str(i+1) + ',' + str(newstats[i][2])+'\n')
+            sys.stderr.write("Length of Redacted Dates String: " + "file " + str(i+1) + ',' + str(newstats[i][2])+'\n')
 
-            sys.stderr.write("Length of Redacted Dates String: " + "file " + str(i+1) + ',' + str(newstats[i][3])+'\n')
+            sys.stderr.write("Length of Redacted Address String: " + "file " + str(i+1) + ',' + str(newstats[i][3])+'\n')
 
-            sys.stderr.write("Length of Redacted Address String: " + "file " +  str(i+1) + ',' + str (newstats[i][4])+'\n')
+            sys.stderr.write("Length of Redacted Genders String: " + "file " +  str(i+1) + ',' + str (newstats[i][4])+'\n')
 
             sys.stderr.write("Length of Redacted Concept String: " + "file " + str(i+1) + ',' + str(newstats[i][5])+'\n')
 

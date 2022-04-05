@@ -19,13 +19,20 @@ def redactname(data2):
 
     count1 =0
 
-    for ent in data1.ents:
-        if (ent.label_ == "PERSON"):
-            data2 = data2.replace(ent.text, "\u2588" *len(ent.text))
+    matcher = Matcher(nlp.vocab)
     
-            count1 += len(ent.text)    
+    pattern = [{"ENT_TYPE": "PERSON"}]
+    matcher.add("personEnt", [pattern])    
+    
+    matches = matcher(data1)
 
-    return data2, count1
+    listname = []
+
+    for mid, start, end in matches:
+        listname.append((start,end))
+        count1 += len(str(data1[start:end]))
+        
+    return listname, count1
 
 
 def redactgender(data2):
@@ -63,14 +70,15 @@ def redactphone(data2):
     matcher.add("phone no", [pattern1])
 
     matches = matcher(data22)
+    
+    listphone = []
 
     count31 = 0
 
     for mid, start, end in matches:
-        data2 = data2.replace(str(data22[start:end]), "\u2588" *len(str(data22[start:end])))
         
+        listphone.append((start,end))
         count31 +=  len(str(data22[start:end]))
-
 
 
     expression = r"(\()?(\d{3})(\))?(\s*)?(.)?(\s*)?(\d{3})(\s*)?(.)?(\s*)?(\d{4})"
@@ -82,12 +90,26 @@ def redactphone(data2):
         start, end = match.span()
         span = data22.char_span(start,end)
 
+                
+        if span is not None:
+
+            j = 0
+
+            for token in span:
+                if j ==0:
+                    start = token.i
+                if j == len(span) -1:
+                    end = token.i+1
+                j += 1
+
+            listphone.append((start,end))
+
         if span is not None:
             
-            str1 = str(span.text)
-            
-            data2 = data2.replace(str1, "\u2588" *len(str1))
+            j = 0
 
+            str1 = str(span.text)
+                      
             count32 += len(str1)
 
     expression1 = r"(\()?(\d{3})(\))?(\s*)?(\/)?(\s*)?(\d{3})(\s*)?(\/)?(\s*)?(\d{4})"
@@ -100,15 +122,26 @@ def redactphone(data2):
 
         if span is not None:
 
-            str1 = str(span.text)
+            j = 0
 
-            data2 = data2.replace(str1, "\u2588" *len(str1))
+            for token in span:
+                if j ==0:
+                    start = token.i
+                if j == len(span) -1:
+                    end = token.i+1
+                j += 1
+
+            listphone.append((start,end))
+
+        if span is not None:
+
+            str1 = str(span.text)
 
             count33 += len(str1)
     
     count3 = count31 + count32 + count33
 
-    return data2, count3
+    return listphone, count3
 
 
 def redactdate(data2):
@@ -120,16 +153,32 @@ def redactdate(data2):
 
     count41 = 0 
 
+    listdate = []
+
+
     for match in re.finditer(expression, data33.text):
         start, end = match.span()
         span = data33.char_span(start,end)
 
         if span is not None:
+
+            j = 0
+
+            for token in span:
+
+                if j ==0:
+                    start = token.i
+                if j == len(span) -1:
+                    end = token.i+1
+                j += 1
+
+            listdate.append((start,end))
+
+
+        if span is not None:
             
             str1 = str(span.text)
-            
-            data2 = data2.replace(str1, "\u2588" *len(str1))
-
+    
             count41 += len(str1)
 
     expression1 = r"(\d{2})(\/)(\d{2})(\/)(\d{4})(\s*)(\d{2})(:)(\d{2})(:)?(\d{2})?(\s*)([AP]M)"
@@ -141,10 +190,22 @@ def redactdate(data2):
         span = data33.char_span(start,end)
 
         if span is not None:
+
+            j = 0
+
+            for token in span:
+                if j ==0:
+                    start = token.i
+                if j == len(span) -1:
+                    end = token.i+1
+                j += 1
+
+            listdate.append((start,end))
+
+
+        if span is not None:
             
             str1 = str(span.text)
-            
-            data2 = data2.replace(str1, "\u2588" *len(str1))
 
             count42 += len(str1)
 
@@ -158,9 +219,23 @@ def redactdate(data2):
     for match in re.finditer(expression2, data33.text):
         start, end = match.span()
         span = data33.char_span(start,end)
+
+        if span is not None:
+
+            j = 0
+
+            for token in span:
+                if j ==0:
+                    start = token.i
+                if j == len(span) -1:
+                    end = token.i+1
+                j += 1
+
+            listdate.append((start,end))
+
         if span is not None:
             str1 = str(span.text)
-            data2 = data2.replace(str1, "\u2588" *len(str1))
+            
             count43 += len(str1)
 
     expression3 = r"[A-Za-z]{1,9}(,)(\s*)?[A-Za-z]{1,9}(\s*)(\d{2})(,)?(\s*)?(\d{4})(\s*)(\d*)?(:)?(\d*)(\s*)([AP]M)?"
@@ -170,9 +245,23 @@ def redactdate(data2):
     for match in re.finditer(expression3, data33.text):
         start, end = match.span()
         span = data33.char_span(start,end)
+        
+        if span is not None:
+
+            j = 0
+
+            for token in span:
+                if j ==0:
+                    start = token.i
+                if j == len(span) -1:
+                    end = token.i+1
+                j += 1
+
+            listdate.append((start,end))
+
         if span is not None:
             str1 = str(span.text)
-            data2 = data2.replace(str1, "\u2588" *len(str1))
+            
             count441 += len(str1)
 
 
@@ -183,9 +272,23 @@ def redactdate(data2):
     for match in re.finditer(expression4, data33.text):
         start, end = match.span()
         span = data33.char_span(start,end)
+       
+        if span is not None:
+
+            j =0
+
+            for token in span:
+                if j ==0:
+                    start = token.i
+                if j == len(span) -1:
+                    end = token.i+1
+                j += 1
+
+            listdate.append((start,end))
+
         if span is not None:
             str1 = str(span.text)
-            data2 = data2.replace(str1, "\u2588" *len(str1))
+            
             count44 += len(str1)
 
 
@@ -196,16 +299,28 @@ def redactdate(data2):
     for match in re.finditer(expression5, data33.text):
         start, end = match.span()
         span = data33.char_span(start,end)
+        
+        if span is not None:
+
+            j = 0 
+
+            for token in span:
+                if j ==0:
+                    start = token.i
+                if j == len(span) -1:
+                    end = token.i+1
+                j += 1
+
+            listdate.append((start,end))
+
         if span is not None:
             str1 = str(span.text)
-            data2 = data2.replace(str1, "\u2588" *len(str1))
+            
             count45 += len(str1)
-
-
 
     count4 = count41 + count42 + count43 + count441+ count44 + count45
 
-    return data2, count4
+    return listdate, count4
 
 def redactaddress(data2):
 
@@ -219,14 +334,17 @@ def redactaddress(data2):
 
     matches = matcher44(data44)
 
+    listaddress = []
+
     count51 = 0
 
     for mid, start, end in matches:
         
-        str1 = str(data44[start:end])
-        
-        data2 = data2.replace(str1, "\u2588"*len(str1))
+        listaddress.append((start,end))
 
+        str1 = str(data44[start:end])
+      
+        
         count51 += len(str1)
 
     count52 =0
@@ -236,9 +354,24 @@ def redactaddress(data2):
     for match in re.finditer(expression41, data44.text):
         start, end = match.span()
         span = data44.char_span(start,end)
+        
+        if span is not None:
+            
+            j =0
+
+            for token in span:
+                if j ==0:
+                    start = token.i
+                if j == len(span) -1:
+                    end = token.i+1
+                j += 1
+
+            listaddress.append((start,end))
+
+
         if span is not None:
             str1 = str(span.text)
-            data2 = data2.replace(str1, "\u2588" *len(str1))
+            
             count52 += len(str1)
 
     count53 =0
@@ -249,9 +382,21 @@ def redactaddress(data2):
     for match in re.finditer(expression42, data44.text):
         start, end = match.span()
         span = data44.char_span(start,end)
+        
+        if span is not None:
+
+            for token in span:
+                if j ==0:
+                    start = token.i
+                if j == len(span) -1:
+                    end = token.i+1
+                j += 1
+
+            listaddress.append((start,end))
+
         if span is not None:
             str1 = str(span.text)
-            data2 = data2.replace(str1, "\u2588" *len(str1))
+            
             count53 += len(str1)
 
     count54 =0
@@ -262,9 +407,24 @@ def redactaddress(data2):
     for match in re.finditer(expression43, data44.text):
         start, end = match.span()
         span = data44.char_span(start,end)
+        
+
+        if span is not None:
+
+            j = 0
+
+            for token in span:
+                if j ==0:
+                    start = token.i
+                if j == len(span) -1:
+                    end = token.i+1
+                j += 1
+
+            listaddress.append((start,end))
+
         if span is not None:
             str1 = str(span.text)
-            data2 = data2.replace(str1, "\u2588" *len(str1))
+            
             count54 += len(str1)
 
     count55 = 0
@@ -276,9 +436,23 @@ def redactaddress(data2):
     for match in re.finditer(expression44, data44.text):
         start, end = match.span()
         span = data44.char_span(start,end)
+        
+        if span is not None:
+
+            j = 0
+
+            for token in span:
+                if j ==0:
+                    start = token.i
+                if j == len(span) -1:
+                    end = token.i+1
+                j += 1
+
+            listaddress.append((start,end))
+
         if span is not None:
             str1 = str(span.text)
-            data2 = data2.replace(str1, "\u2588" *len(str1))
+            
             count55 += len(str1)
 
     count56 = 0
@@ -289,9 +463,24 @@ def redactaddress(data2):
     for match in re.finditer(expression45, data44.text):
         start, end = match.span()
         span = data44.char_span(start,end)
+        
+        if span is not None:
+
+            j = 0
+
+            for token in span:
+                if j ==0:
+                    start = token.i
+                if j == len(span) -1:
+                    end = token.i+1
+                j += 1
+
+            listaddress.append((start,end))
+
+
         if span is not None:
             str1 = str(span.text)
-            data2 = data2.replace(str1, "\u2588" *len(str1))
+            
             count56 += len(str1)
 
     count57 = 0
@@ -301,15 +490,30 @@ def redactaddress(data2):
     for match in re.finditer(expression46, data44.text):
         start, end = match.span()
         span = data44.char_span(start,end)
+        
+        if span is not None:
+
+            j = 0
+
+            for token in span:
+                if j ==0:
+                    start = token.i
+                if j == len(span) -1:
+                    end = token.i+1
+                j += 1
+
+            listaddress.append((start,end))
+
+
         if span is not None:
             str1 = str(span.text)
-            data2 = data2.replace(str1, "\u2588" *len(str1))
+            
             count57 += len(str1)
 
 
     count5 = count51 + count52 + count53 + count54 + count55 + count56 + count57
 
-    return data2, count5
+    return listaddress, count5
     
 
 
