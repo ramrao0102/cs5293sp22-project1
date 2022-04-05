@@ -524,10 +524,11 @@ def redactconcept(data2, conceptstr):
 
     count6 = 0
 
+    listconcept = []
+
     syno = similarword(conceptstr)
 
     for k in syno:
-
 
         for token in data55:
         
@@ -537,11 +538,26 @@ def redactconcept(data2, conceptstr):
                 
                 #print(str(token1.sent))
 
-                data2 = data2.replace(str(token1.sent), "\u2588"*len(str(token1.sent)))
+                j = 0
 
+                for token in token1.sent:
+
+                    if j ==0:
+                      
+                        start = token.i
+
+                    if j == len(token.sent) -1:
+                        
+                        end = token.i + 1
+
+                    j += 1
+
+                listconcept.append((start,end))
+
+                
                 count6 += len(str(token1.sent))
 
-    return data2, count6
+    return listconcept, count6
 
 def similarword(conceptstr):
     synonyms = [ ]

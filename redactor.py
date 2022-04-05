@@ -89,7 +89,12 @@ if __name__ == "__main__":
 
         stats.append(count4)
 
-        listredact = listname + listphone + listdate + listaddress
+        if concept == "--concept":
+            listconcept, count5  = project1.redactconcept(data2, conceptstr)
+
+        stats.append(count5)
+
+        listredact = listname + listphone + listdate + listaddress + listconcept
 
         for i in range(len(listredact)):
             
@@ -99,14 +104,10 @@ if __name__ == "__main__":
                 data2 = data2.replace(str(dataredact[listredact[i][0]:listredact[i][1]]), "\u2588" *len(str(dataredact[listredact[i][0]:listredact[i][1]])))
 
         if genders == "--genders":
-            data2, count5 = project1.redactgender(data2)
-
-        stats.append(count5)
-
-        if concept == "--concept":
-            data2, count6  = project1.redactconcept(data2, conceptstr)
+            data2, count6 = project1.redactgender(data2)
 
         stats.append(count6)
+
 
         if outputstr == "stdout":
 
@@ -187,9 +188,9 @@ if __name__ == "__main__":
 
             sys.stdout.write("Length of Redacted Address String: " + "file " + str(i+1) + ',' + str(newstats[i][3])+'\n')
 
-            sys.stdout.write("Length of Redacted Genders String: " + "file " +  str(i+1) + ',' + str (newstats[i][4])+'\n')
+            sys.stdout.write("Length of Redacted Concept String: " + "file " +  str(i+1) + ',' + str (newstats[i][4])+'\n')
 
-            sys.stdout.write("Length of Redacted Concept String: " + "file " + str(i+1) + ',' + str(newstats[i][5])+'\n')
+            sys.stdout.write("Length of Redacted Genders String: " + "file " + str(i+1) + ',' + str(newstats[i][5])+'\n')
 
         if outputstr == "stderr":
 
@@ -203,7 +204,7 @@ if __name__ == "__main__":
 
             sys.stderr.write("Length of Redacted Address String: " + "file " + str(i+1) + ',' + str(newstats[i][3])+'\n')
 
-            sys.stderr.write("Length of Redacted Genders String: " + "file " +  str(i+1) + ',' + str (newstats[i][4])+'\n')
+            sys.stderr.write("Length of Redacted Concept String: " + "file " +  str(i+1) + ',' + str (newstats[i][4])+'\n')
 
-            sys.stderr.write("Length of Redacted Concept String: " + "file " + str(i+1) + ',' + str(newstats[i][5])+'\n')
+            sys.stderr.write("Length of Redacted Genders String: " + "file " + str(i+1) + ',' + str(newstats[i][5])+'\n')
 
