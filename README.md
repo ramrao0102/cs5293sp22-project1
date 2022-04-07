@@ -61,25 +61,17 @@ Several functions have been written in the project1.py to perform the redaction.
 The function def redactname(data2) is used to find “PERSON”
 
 1) If a person entity type is founded, it is redacted, and the count of the length of the string redacted and the data2 string is returned to main. <br>
-2) \u2588 unicode full block character replaces each string character redacted.
-
-The function def redactgender(data2) is used to find gender strings to redact.
-
-1) I am using a list of "he", "him", "her", "she", "He", "She", "Him", "Her", "father", "Father", "Mother", <br>
-"mother", "Sister", "sister", "Brother", "brother", "girl", "Girl", "Boy", "boy" in a list and if a token in a <br>
-data string matches these strings, then the token is redacted. The count of the length of the string redacted and <br>
-the data2 string is returned to main. <br>
-2) \u2588 unicode full block character replaces each string character redacted.
+2) \u2588 unicode full block character replaces each string character redacted. <br>
 
 The function redactphone(data2) is used to find phone numbers of different patterns to redact. <br>
-There are 3 patterns/expressions that are being checked for redaction of phone numbers
+There are 3 patterns/expressions that are being checked for redaction of phone numbers <br>
 
 Pattern 1:  +1 (Optional) (315)- 243 3255 Note that parentheses before and after first 3 digits and - are optional <br>
 Expression: (315). 243 . 3255 Note that parentheses before and after first three digits are optional.  Note also whitespaces between digits and the .'s are optional.<br>
 Expression 1:  (315) /243 / 3255  Note that parentheses before and after first three digits are optional.  Note also whitespaces between digits and the / are optional.
 
 The function redactdate(data2) is used to find dates of different patterns to redact.<br>
-There were several patterns/expressions checked and they are presented below.
+There were several patterns/expressions checked and they are presented below.<br>
 
 Expression <br>
 Sun, 30 Dec 2001 22:49:42 -0800 (PST), This will allow any day of the week to be included first, followed by the date, month, <br> 
@@ -96,7 +88,7 @@ This expression will acccomodate 10:30:25 AM or PM as options after the year
 Expression4 <br>
 January, 2022 or Jan, 2022 or January 2022 or Jan 2022 <br>
 Expression4 <br>
-02/20/2011
+02/20/2011 <br>
 
 The function redactaddress(data2) is used to find addresses of different patterns to redact. <br>
 There were several patterns/expressions checked and they are presented below.
@@ -116,7 +108,20 @@ P O Box 25245.  Spaces are optional and there are 1 or more digits after Box
 The function  redactconcept(data2, conceptstr) is used to find a conceptstr from the command line and then redact sentences <br>
 that contain that conceptstr. <br>
 wordnet is used to find synonmys for the conceptstr and so the conceptstr and its synonyms are searched for in the text file <br>
-and the sentences tha contain them are redacted.
+and the sentences tha contain them are redacted. <br>
+
+The function def redactgender(data2) is used to find gender strings to redact.<br>
+
+1) I am using a list of "he", "him", "her", "she", "He", "She", "Him", "Her", "father", "Father", "Mother", <br>
+"mother", "Sister", "sister", "Brother", "brother", "girl", "Girl", "Boy", "boy" in a list and if a token in a <br>
+data string matches these strings, then the token is redacted. The count of the length of the string redacted and <br>
+the data2 string is returned to main. <br>
+2) \u2588 unicode full block character replaces each string character redacted.<br>
+
+Note that five of the functions in the project1.py return a list that contains the span of the tokens to be redacted from the datafile and <br>
+the redaction occurs in the redactor.py file. Each value in the list is a tuple that contains the start index and the end index of the tokens to <br>
+be redacted. These five functions are for redaction of names, phone numbers, dates, addresses, and concept string. <br>
+The redaction for the sixth function, gender specific words is occuring in the project1.py function directly.
 
 Once executed the data is returned to the redactor.py file and it is written to a file with redacted added <br>
 (e.g., 211_2.txtredacted) and stored in /enroncorpus/write1 relative path from root.
@@ -130,11 +135,11 @@ The stats.txt file contains the lengths of the strings redacted by redaction typ
 
 The stats.txt file contains six lines: <br>
 1) Line 1 contains total length of redacted string from all text files processed for names. <br>
-2) Line 2 contains total length of redacted string from all text files processed for gender specific words. <br>
-3) Line 3 contains total length of redacted string from all text files processed for phone numbers. <br>
-4) Line 4 contains total length of redacted string from all text files processed for dates. <br>
-5) Line 5 contains total length of redacted string from all text files processed for addresses. <br>
-6) Line 6 contains total length of redacted string from all text files processed for conceptstring.
+2) Line 2 contains total length of redacted string from all text files processed for phone numbers. <br>
+3) Line 3 contains total length of redacted string from all text files processed for dates. <br>
+4) Line 4 contains total length of redacted string from all text files processed for addresses. <br>
+5) Line 5 contains total length of redacted string from all text files processed for conceptstring. <br>
+6) Line 6 contains total length of redacted string from all text files processed for gender specific words.
 
 ## Testing of Package
 
