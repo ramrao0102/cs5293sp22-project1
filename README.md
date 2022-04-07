@@ -32,8 +32,10 @@ pipenv run python redactor.py --input '*.txt' \ <br>
                                        --output 'enroncorpus/write1/' \ <br>
                                        --stats stderr
 
-Note that the program can handle the argument stdout inplace of stderr if the user places that on the command line.
-sys.argv is used to find the arguments that are entered on the command line and assign them to the variables.
+Note that the program can handle the argument stdout inplace of stderr if the user places that on the command line. <br>
+Both stdout and stderr are printing to console while the string after the --output is being used as folder/file for <br>
+placement of the redacted text file.<br>
+sys.argv is used to find the arguments that are entered on the command line and assign them to the variables. <br>
 
 At ths start of the project several text files were placed in /enroncorpus folder. <br>
 These are the files that need to be redacted by the program. <br>
@@ -97,11 +99,11 @@ Pattern <br>
 It will find an entity such as city or state that can be read by entity finder of spacy in the string and letters that <br>
 denote address and five digits for zip code.  <br>
 Several Expressions to find the following: <br>
-4725 Divisidero St.<br>
-4725 Divisidero Rd.<br>
-4725 Divisidero Ave.<br>
-4725 CarlosBee Hwy.<br>
-4725 CarlosBee Plaza.<br>
+4725 Divisidero St or Street <br>
+4725 Divisidero Rd or Road<br>
+4725 Divisidero Ave or Avenue<br>
+4725 CarlosBee Hwy or Highway <br>
+4725 CarlosBee Plaza or Pz<br>
 An Expression to find the following: <br>
 P O Box 25245.  Spaces are optional and there are 1 or more digits after Box
 
@@ -121,10 +123,18 @@ the data2 string is returned to main. <br>
 Note that five of the functions in the project1.py return a list that contains the span of the tokens to be redacted from the datafile and <br>
 the redaction occurs in the redactor.py file. Each value in the list is a tuple that contains the start index and the end index of the tokens to <br>
 be redacted. These five functions are for redaction of names, phone numbers, dates, addresses, and concept string. <br>
-The redaction for the sixth function, gender specific words is occuring in the project1.py function directly.
+The redaction for the sixth function, gender specific words is occuring in the project1.py function directly. <br>
 
 Once executed the data is returned to the redactor.py file and it is written to a file with redacted added <br>
 (e.g., 211_2.txtredacted) and stored in /enroncorpus/write1 relative path from root.
+
+## Bug
+
+Noticed one bug in the list that contains the strings to be redacted.  On one of the files, it was redacting a single character string <br>
+in the date string.  In order to find a workaround, I am only redacting those strings that are of a length of more than 1 character. <br>
+This is specific to the spans being retained in the list that is being used to redact. It applies to names, phone #s, dates, addresses, and concept <br>
+string.  This does not apply to the gender specific string.  As that redaction is being handled separately and after the redaction for other types are <br>
+completed. <br>
 
 ## Statistics for Redacted Strings
 
