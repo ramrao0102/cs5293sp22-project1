@@ -130,10 +130,11 @@ Once executed the data is returned to the redactor.py file and it is written to 
 
 ## Bug
 
-Noticed one bug in the list that contains the strings to be redacted.  On one of the files, it was redacting a single character string <br>
-in the date string.  In order to find a workaround, I am only redacting those strings that are of a length of more than 1 character. <br>
-This is specific to the spans being retained in the list that is being used to redact. It applies to names, phone #s, dates, addresses, and concept <br>
-string.  This does not apply to the gender specific string.  As that redaction is being handled separately and after the redaction for other types are completed. <br>
+Noticed one bug in the list that contains the strings to be redacted.  On one of the files, it was redacting a single <br>
+character string  in the date string.  In order to find a workaround, I am only redacting those strings that are of a <br>
+length of more than 1 character. This is specific to the spans being retained in the list that is being used to redact.<br>
+It applies to names, phone #s, dates, addresses, and concept string.  This does not apply to the gender specific string.<br>
+As that redaction is being handled separately and after the redaction for other types are completed. <br>
 
 ## Statistics for Redacted Strings
 
