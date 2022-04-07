@@ -105,8 +105,6 @@ def redactphone(data2):
             listphone.append((start,end))
 
         if span is not None:
-            
-            j = 0
 
             str1 = str(span.text)
                       
@@ -149,7 +147,7 @@ def redactdate(data2):
     data33 = nlp(data2)
 
 
-    expression = r"([A-Za-z]{1,9},)(\s*)(\d{1,2})(\s*)([A-Za-z]{1,9})(\s*)(\d{2,4})(\s*)(\d{2}:\d{2}:\d{2})(\s*)(-*)(\d{4})(\s*)((\(*)([PCE][DS]T)(\)*))?"
+    expression = r"([A-Za-z]{2,9},)(\s*)(\d{1,2})(\s*)([A-Za-z]{2,9})(\s*)(\d{2,4})(\s*)(\d{2}:\d{2}:\d{2})(\s*)(-*)(\d{4})(\s*)((\(*)([PCE][DS]T)(\)*))?"
 
     count41 = 0 
 
@@ -238,7 +236,7 @@ def redactdate(data2):
             
             count43 += len(str1)
 
-    expression3 = r"[A-Za-z]{1,9}(,)(\s*)?[A-Za-z]{1,9}(\s*)(\d{2})(,)?(\s*)?(\d{4})(\s*)(\d*)?(:)?(\d*)(\s*)([AP]M)?"
+    expression3 = r"[A-Za-z]{2,9}(,)(\s*)?[A-Za-z]{2,9}(\s*)(\d{2})(,)?(\s*)?(\d{4})(\s*)(\d*)?(:)?(\d*)(\s*)([AP]M)?"
     
     count441 = 0
 
@@ -265,7 +263,7 @@ def redactdate(data2):
             count441 += len(str1)
 
 
-    expression4 = r"([A-Za-z]+)(,?)(\s*)?(\d{4})"
+    expression4 = r"([A-Za-z]+)(,?)(\s*)?([1,2]\d{3})"
 
     count44 = 0
 
@@ -292,7 +290,7 @@ def redactdate(data2):
             count44 += len(str1)
 
 
-    expression5 = r"(\d{2})(\/)(\d{2})(\/)(\d{4})"
+    expression5 = r"(\d{2})(\/)(\d{2})(\/)([1,2]\d{3})"
 
     count45 = 0
 
@@ -349,7 +347,7 @@ def redactaddress(data2):
 
     count52 =0
 
-    expression41 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:St)(.)?"
+    expression41 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?((?:St)|(?:Street))(.)?"
 
     for match in re.finditer(expression41, data44.text):
         start, end = match.span()
@@ -376,7 +374,7 @@ def redactaddress(data2):
 
     count53 =0
 
-    expression42 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:Rd)(.)?"
+    expression42 = r"(\d{0,9})(\s*)([A-Za-z]+)(\s*)(([A-Za-z]+)?)(\s*)((?:Rd)|(?:Road))(.)?"
 
 
     for match in re.finditer(expression42, data44.text):
@@ -384,6 +382,8 @@ def redactaddress(data2):
         span = data44.char_span(start,end)
         
         if span is not None:
+
+            j =0
 
             for token in span:
                 if j ==0:
@@ -401,7 +401,7 @@ def redactaddress(data2):
 
     count54 =0
 
-    expression43 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:Ave)(.)?"
+    expression43 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?((?:Ave)|(?:Avenue))(.)?"
 
 
     for match in re.finditer(expression43, data44.text):
@@ -430,7 +430,7 @@ def redactaddress(data2):
     count55 = 0
 
 
-    expression44 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:Hwy)(.)?"
+    expression44 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?((?:Hwy)|(?:Highway))(.)?"
 
 
     for match in re.finditer(expression44, data44.text):
@@ -457,7 +457,7 @@ def redactaddress(data2):
 
     count56 = 0
 
-    expression45 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?(?:Plaza)(.)?"
+    expression45 = r"(\d{0,9})(\s*)?(([A-Za-z]+)?)(\s*)? (([A-Za-z]+)?)(\s*)?((?:Pz)|(?:Plaza))(.)?"
 
 
     for match in re.finditer(expression45, data44.text):
@@ -485,7 +485,7 @@ def redactaddress(data2):
 
     count57 = 0
 
-    expression46 = r"(P)(\s*)?(O)(\s*)?(Box)(\s*)?(\d+) (.)?"
+    expression46 = r"(P)(\s*)(O)(\s*)(Box)(\s*)(\d+)(.)?"
 
     for match in re.finditer(expression46, data44.text):
         start, end = match.span()

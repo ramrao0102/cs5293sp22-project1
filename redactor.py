@@ -99,7 +99,9 @@ if __name__ == "__main__":
         for i in range(len(listredact)):
             
             dataredact = nlp(data)
+       
             
+
             if len(str(dataredact[listredact[i][0]:listredact[i][1]])) > 1:
                 data2 = data2.replace(str(dataredact[listredact[i][0]:listredact[i][1]]), "\u2588" *len(str(dataredact[listredact[i][0]:listredact[i][1]])))
 
