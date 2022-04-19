@@ -32,7 +32,7 @@ def test_datefunction():
 
         count += count4
 
-    f = open("stats11.txt", "r")
+    f = open("stats11", "r")
     Lines = f.readlines()
 
     a =[]

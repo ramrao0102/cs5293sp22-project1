@@ -20,7 +20,6 @@ def readinput():
 
     for j in range(len(arg_ls)):
         
-
         if arg_ls[j] == "--names":
             names = arg_ls[j]
 
@@ -42,8 +41,7 @@ def readinput():
 
         if arg_ls[j] == "--stats":
             outputstr = arg_ls[j+1]
-            print(type(outputstr))
-        
+                    
     return names, dates, phones, genders, address, concept, conceptstr, outputstr
 
 
@@ -106,7 +104,9 @@ if __name__ == "__main__":
 
     wrdir = writepath()
 
-    os.mkdir(wrdir)
+    if not os.path.exists(wrdir):
+
+        os.mkdir(wrdir)
 
     writepathfile = open('writepath', 'w')
     writepathfile.write(wrdir)     
@@ -115,8 +115,6 @@ if __name__ == "__main__":
     readpathfile.write(filename)
 
     files_grabbed = (glob.glob(filename))
-
-    print(files_grabbed)
 
     stats = []
 
@@ -192,7 +190,7 @@ if __name__ == "__main__":
     statsreturned.append(len5)
     statsreturned.append(len6)
 
-    statsfilename = 'stats11.txt'
+    statsfilename = 'stats11'
 
     with open(statsfilename, 'w') as my_list_file:
         my_list_file.writelines("%s\n" % stats for stats in statsreturned)
@@ -237,7 +235,7 @@ if __name__ == "__main__":
 
    # These below lines are to write a stat file that can be redirected to stdout and stderr   
 
-    myfile1 = open("stats.txt", 'w')
+    myfile1 = open("stats", 'w')
 
     myfile1.write(' "Summary Statistics of Redacted Strings: " \n')
             
@@ -269,11 +267,11 @@ if __name__ == "__main__":
 
     if outputstr == "stdout":
 
-        os.system("cat stats.txt > statsstdout.txt")
+        os.system("cat stats > statsstdout")
 
     if outputstr == "stderr":
 
-        os.system("cat stats.txt > statsstderr.txt 2>&1")
+        os.system("cat stats > statsstderr 2>&1")
 
         
 

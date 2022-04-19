@@ -3,7 +3,7 @@ import pytest
 
 
 def test_functions():
-    f = open("stats11.txt", "r")
+    f = open("stats11", "r")
     Lines = f.readlines()
 
     a =[]
