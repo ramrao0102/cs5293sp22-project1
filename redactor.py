@@ -70,7 +70,9 @@ def writepath():
 
     wrdir = wrdir.replace("'", "")
 
-    wrdir = wrdir.replace("/", "")
+    if wrdir.endswith("/"):
+
+        wrdir = wrdir.replace(wrdir[-1], "")
     
     return wrdir
 
