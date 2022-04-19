@@ -68,12 +68,9 @@ def writepath():
         if arg_ls[j] == "--output":
             wrdir = arg_ls[j+1]
 
-    wrdir = wrdir.replace("'", "")
+   
+    print(wrdir)
 
-    if wrdir.endswith("/"):
-
-        wrdir = wrdir.replace(wrdir[-1], "")
-    
     return wrdir
 
 def statistics():
@@ -108,7 +105,7 @@ if __name__ == "__main__":
 
     if not os.path.exists(wrdir):
 
-        os.mkdir(wrdir)
+        os.makedirs(wrdir)
 
     writepathfile = open('writepath', 'w')
     writepathfile.write(wrdir)     
