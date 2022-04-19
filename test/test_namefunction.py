@@ -1,5 +1,6 @@
 import pytest
 import project1
+import redactor
 import numpy
 import glob
 import re
@@ -10,16 +11,18 @@ from spacy.matcher import PhraseMatcher
 
 def test_namefunction():
     
-    path = "enroncorpus/"+ "*.txt"
+    with open("readpath") as f:
+        readlocation = f.readline().rstrip()
+    
+    readlocation = str(readlocation)
 
-    files_grabbed = (glob.glob(path))
+    files_grabbed = (glob.glob(readlocation))
 
     count = 0
 
     for i in files_grabbed:
 
         with open(i) as f:
-            writefile = i.replace('enroncorpus', '')
             data = f.read()
 
         data2 = data
@@ -28,7 +31,7 @@ def test_namefunction():
 
         count += count4
 
-    f = open("stats.txt", "r")
+    f = open("stats11.txt", "r")
     Lines = f.readlines()
 
     a =[]
