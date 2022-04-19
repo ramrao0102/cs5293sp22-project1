@@ -8,6 +8,7 @@ import os
 import nltk
 import spacy
 import project1
+import os
 from spacy.matcher import Matcher
 from spacy.matcher import PhraseMatcher
 from nltk.corpus import wordnet
@@ -234,47 +235,45 @@ if __name__ == "__main__":
 
             myfile.close()
 
+   # These below lines are to write a stat file that can be redirected to stdout and stderr   
+
+    myfile1 = open("stats.txt", 'w')
+
+    myfile1.write(' "Summary Statistics of Redacted Strings: " \n')
+            
+    for i in range(len(newstats)):
+                
+        myfile1.write('File No: ')
+        myfile1.write('%s\n' %(i+1))
+                
+        myfile1.write('Length of Redacted Name String: ')
+        myfile1.write('%s\n' %newstats[i][0])
+                
+        myfile1.write('Length of Redacted Phone String: ')
+        myfile1.write('%s\n' %newstats[i][1])
+                
+        myfile1.write('Length of Redacted Dates String: ')
+        myfile1.write('%s\n' %newstats[i][2])
+                
+        myfile1.write('Length of Redacted Address String: ')
+        myfile1.write('%s\n' %newstats[i][3])
+                
+        myfile1.write('Length of Redacted Concept String: ')
+        myfile1.write('%s\n' %newstats[i][4])
+                
+        myfile1.write('Length of Genders String: ')
+        myfile1.write('%s\n' %newstats[i][5])
+           
+    myfile1.close()
+
 
     if outputstr == "stdout":
 
-        temp = sys.stdout
-
-        sys.stdout = open('stats1.txt', 'a')
-
-        for i in range(len(newstats)):
-                
-            print('File No: ')
-            print('%s\n' %(i+1))
-            print('Length of Redacted Name String: ')
-            print('%s\n' %newstats[i][0])
-            print('Length of Redacted Phone String: ')
-            print('%s\n' %newstats[i][1])
-            print('Length of Redacted Dates String: ')
-            print('%s\n' %newstats[i][2])
-            print('Length of Redacted Address String: ')
-            print('%s\n' %newstats[i][3])
-            print('Length of Redacted Concept String: ')
-            print('%s\n' %newstats[i][4])
-            print('Length of Genders String: ')
-            print('%s\n' %newstats[i][5])
-
-        sys.stdout.close()
-
-        sys.stdout = temp
+        os.system("cat stats.txt > statsstdout.txt")
 
     if outputstr == "stderr":
 
-        sys.stderr.write("Summary Statistics of Redacted Strings: " + '\n')
+        os.system("cat stats.txt > statsstderr.txt 2>&1")
 
-        sys.stderr.write("Length of Redacted Name String: " + "file " + str(i+1) + ',' + str(newstats[i][0])+'\n')
-
-        sys.stderr.write("Length of Redacted Phones String: " + "file " +  str(i+1) + ',' + str(newstats[i][1])+'\n')
-
-        sys.stderr.write("Length of Redacted Dates String: " + "file " + str(i+1) + ',' + str(newstats[i][2])+'\n')
-
-        sys.stderr.write("Length of Redacted Address String: " + "file " + str(i+1) + ',' + str(newstats[i][3])+'\n')
-
-        sys.stderr.write("Length of Redacted Concept String: " + "file " +  str(i+1) + ',' + str (newstats[i][4])+'\n')
-
-        sys.stderr.write("Length of Redacted Genders String: " + "file " + str(i+1) + ',' + str(newstats[i][5])+'\n')
+        
 
