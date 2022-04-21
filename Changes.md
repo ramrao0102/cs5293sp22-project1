@@ -9,6 +9,8 @@ Also, I have now added code to handle the creation of a directory where the user
 output file should either end with the "/" character or not have the "/" character, there should not be a white space at the end of the "/" character for my code to be functional.
 
 Another key assumption here the flags need to have -- infront of it and should have the same spelling as noted in the project directions.  Otherwise for example if the user uses --output as a flag and 'output' as the conceptstring it messes the code up.  So, please make sure that then flags follow the pattern noted in the assignment.  Also, there should be no space between the -- and the flag.  I am sure there is a way to generalize this more, but I have not attempted to do it.  I want to make sure that we get past the command line and actually review the work please.
+For some reason, after I committed the changes to markdown, the end of line character \ got stripped but we need to have the end of line character <br>
+when we enter into command line to run the program. <br>
 
 
 pipenv run python redactor.py --input '*.txt' \
