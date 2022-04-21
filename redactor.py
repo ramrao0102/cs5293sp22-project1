@@ -20,26 +20,26 @@ def readinput():
 
     for j in range(len(arg_ls)):
         
-        if arg_ls[j] == "--names":
-            names = arg_ls[j]
+        if "--names" in arg_ls[j]:
+            names = "names"
 
-        if arg_ls[j] == "--dates":
-            dates = arg_ls[j]
+        if "--dates" in arg_ls[j]:
+            dates = "dates"
 
-        if arg_ls[j] == "--phones":
-            phones = arg_ls[j]
+        if "--phones" in arg_ls[j]:
+            phones = "phones"
 
-        if arg_ls[j] == "--genders":
-            genders = arg_ls[j]
+        if "--genders" in arg_ls[j]:
+            genders = "genders"
 
-        if arg_ls[j] == "--address":
-            address = arg_ls[j]
+        if "--address" in arg_ls[j]:
+            address = "address"
 
-        if arg_ls[j] == "--concept":
-            concept = arg_ls[j]            
+        if "--concept" in arg_ls[j]:
+            concept = "concept"          
             conceptstr = arg_ls[j+1]
 
-        if arg_ls[j] == "--stats":
+        if "--stats" in arg_ls[j]:
             outputstr = arg_ls[j+1]
                     
     return names, dates, phones, genders, address, concept, conceptstr, outputstr
@@ -51,7 +51,7 @@ def readpath():
 
     for j in range(len(arg_ls)):
 
-        if arg_ls[j] == "--input":
+        if "--input" in arg_ls[j]:
             filename = arg_ls[j+1]
 
 
@@ -65,9 +65,13 @@ def writepath():
 
     for j in range(len(arg_ls)):
 
-        if arg_ls[j] == "--output":
+        if "--output" in arg_ls[j]:
+            print(arg_ls[j+1])
             wrdir = arg_ls[j+1]
-
+            l = len(wrdir)
+            
+            if (wrdir[l-1]) == "/":
+                wrdir = wrdir[:l-1]
    
     print(wrdir)
 
@@ -126,31 +130,31 @@ if __name__ == "__main__":
     
         data2 = data
 
-        if names == "--names":
+        if names == "names":
     
             listname, count1 =  project1.redactname(data2)
 
         stats.append(count1)
         
-        if phones == "--phones":
+        if phones == "phones":
 
             listphone, count2 = project1.redactphone(data2)
 
         stats.append(count2)
 
-        if dates == "--dates":
+        if dates == "dates":
 
             listdate, count3 = project1.redactdate(data2)
 
         stats.append(count3)
     
-        if address == "--address":
+        if address == "address":
 
             listaddress, count4  = project1.redactaddress(data2)
 
         stats.append(count4)
 
-        if concept == "--concept":
+        if concept == "concept":
             listconcept, count5  = project1.redactconcept(data2, conceptstr)
 
         stats.append(count5)
@@ -164,7 +168,7 @@ if __name__ == "__main__":
             if len(str(dataredact[listredact[i][0]:listredact[i][1]])) > 1:
                 data2 = data2.replace(str(dataredact[listredact[i][0]:listredact[i][1]]), "\u2588" *len(str(dataredact[listredact[i][0]:listredact[i][1]])))
 
-        if genders == "--genders":
+        if genders == "genders":
             data2, count6 = project1.redactgender(data2)
 
         stats.append(count6)
