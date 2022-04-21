@@ -15,6 +15,8 @@ def test_istheredata():
 
     writelocation = str(writelocation)
 
+    print(writelocation)
+
     obj = os.scandir(writelocation)
     i = 0
     for entry in obj:
