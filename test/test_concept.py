@@ -8,6 +8,8 @@ import nltk
 import spacy
 from spacy.matcher import Matcher
 from spacy.matcher import PhraseMatcher
+nltk.download('omw-1.4')
+
 
 def test_conceptfunction():
     
