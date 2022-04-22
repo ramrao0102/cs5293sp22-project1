@@ -28,11 +28,18 @@ information nor were output files being generated.  This has been corrected.  Pl
 ## Missing Stats
 
 I have now added code to make sure that when the user enters a text file after the --stats flag, then based on the <br>
-they enter, it will create a stats log of the total length of redactions that are to occur <br>
+they enter, it will create a stats log of the total length of redactions that are to occur <br>.
+PLEASE MAKE SURE THAT YOU DO NOT USE statsbackup or statsforpytest_ram file names if you pass in a filename following the <br>
+--stats flag. <br>
 
-Also, another "stats" file is being created and is being written to the project root folder.  This file will be "redirected" <br>
+Also, another "statsbackup" file is being created and is being written to the project root folder.  This file will be "redirected" <br>
 to statstderr when the user enters stderr after the --stats flag or statsstdout when the user enters stdout after <br>
 the --stats flag.
+
+Note also a special stats file has been created called "statsforpytest_ram' is created that is used for pytesting. <br>
+This file contains the following lines; length of characters redacted for names, phones, daates, address, concept, and genders. <br>
+This file is being used to check the redact functions in pytest.  The test functions check against the data being passed in and <br>
+and compares it to what is stored in the statsforpytest_ram file for accuracy. <br>
 
 ## File Names Not Assigned Correctly
 
