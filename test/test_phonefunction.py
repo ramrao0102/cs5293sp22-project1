@@ -32,7 +32,7 @@ def test_phonefunction():
 
         count += count4
 
-    f = open("stats11", "r")
+    f = open("statsforpytest_ram", "r")
     Lines = f.readlines()
 
     a =[]

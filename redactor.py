@@ -193,7 +193,7 @@ if __name__ == "__main__":
     statsreturned.append(len5)
     statsreturned.append(len6)
 
-    statsfilename = 'stats11'
+    statsfilename = 'statsforpytest_ram'
 
     with open(statsfilename, 'w') as my_list_file:
         my_list_file.writelines("%s\n" % stats for stats in statsreturned)
@@ -238,7 +238,7 @@ if __name__ == "__main__":
 
    # These below lines are to write a stat file that can be redirected to stdout and stderr   
 
-    myfile1 = open("stats", 'w')
+    myfile1 = open("statsbackup", 'w')
 
     myfile1.write(' "Summary Statistics of Redacted Strings: " \n')
             
@@ -270,11 +270,11 @@ if __name__ == "__main__":
 
     if outputstr == "stdout":
 
-        os.system("cat stats > statsstdout")
+        os.system("cat statsbackup > statsstdout")
 
     if outputstr == "stderr":
 
-        os.system("cat stats > statsstderr 2>&1")
+        os.system("cat statsbackup > statsstderr 2>&1")
 
         
 
